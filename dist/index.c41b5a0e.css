@@ -75,13 +75,16 @@ body {
   --background-color: white;
   --text-color: black;
   --elements-color: white;
-  background-color: var(--background-color);
-  color: var(--text-color);
   margin: 0;
   font-family: Nunito, sans-serif;
 }
 
-body.dark {
+main, header {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+main.dark, header.dark {
   --background-color: #202c37;
   --text-color: white;
   --elements-color: #2b3945;
@@ -222,5 +225,10 @@ a {
   .search-filter-container {
     flex-direction: column;
   }
+}
+
+.country-shimmer {
+  background-color: #ccc;
+  height: 350px;
 }
 /*# sourceMappingURL=index.c41b5a0e.css.map */

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CountryCard from './CountryCard'
+import CountryShimmer from './CountryShimmer'
 export default function CountryList({query}) {
   const[CountryData,setCountryData]=useState([])
   // const[count,setCount]=useState(0)
@@ -31,8 +32,10 @@ export default function CountryList({query}) {
 
   return (
     <>
-    {/* <button onClick={()=>setCount(count+1)}>count</button> */}
-    <div className="countries-container">
+    {/* <button onClick={()=>setCount(count+1)}>count</button> */ }
+    
+    {
+    CountryData.length==0 ?<CountryShimmer/> :<div className="countries-container">
         {
             CountryData.filter((country)=>country.name.common.toLowerCase().includes(query)).map((country)=>{
                 return <CountryCard
@@ -42,11 +45,13 @@ export default function CountryList({query}) {
                 population={country.population}
                 region={country.region}
                 capital={country.capital?.[0]}
+                data={country}
                 />
                 
             })
         }
     </div>
+    }
     </>
   )
 }
