@@ -6,6 +6,7 @@
 
 .back-button {
   cursor: pointer;
+  background-color: var(--elements-color);
   border-radius: 4px;
   padding: 6px 24px;
   box-shadow: 0 0 4px #0003;
@@ -43,6 +44,7 @@
 }
 
 .border-countries a {
+  background-color: var(--elements-color);
   border-radius: 4px;
   padding: 4px 16px;
   font-size: 14px;
@@ -62,6 +64,40 @@
   }
 
   .country-details img {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+.shimmer .flag {
+  background-color: var(--elements-color);
+  border-radius: 4px;
+  width: 40%;
+  height: 240px;
+}
+
+.shimmer .title {
+  background-color: var(--elements-color);
+  border-radius: 4px;
+  height: 36px;
+}
+
+.country-details.shimmer p {
+  background-color: var(--elements-color);
+  border-radius: 2px;
+  height: 22px;
+}
+
+.country-details.shimmer p:last-child {
+  width: 50%;
+}
+
+.details-text-container {
+  flex-grow: 1;
+}
+
+@media (width <= 940px) {
+  .shimmer .flag, .details-text-container {
     width: 100%;
     max-width: 400px;
   }
@@ -91,6 +127,7 @@ main.dark, header.dark {
 }
 
 main {
+  min-height: calc(100vh - 73px);
   padding: 24px;
 }
 
@@ -101,7 +138,10 @@ a {
 
 .header-container {
   background-color: var(--elements-color);
+  z-index: 1;
   padding-inline: 24px;
+  position: sticky;
+  top: 0;
   box-shadow: 0 2px 4px #0000001a;
 }
 
@@ -123,18 +163,18 @@ a {
 
 .countries-container {
   margin-top: 16px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 64px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 32px;
   max-width: 1200px;
   margin-inline: auto;
-  display: flex;
+  display: grid;
 }
 
 .country-card {
   background-color: var(--elements-color);
   border-radius: 8px;
   width: 250px;
+  margin-inline: auto;
   padding-bottom: 24px;
   transition: all .2s ease-in-out;
   display: inline-block;
@@ -160,8 +200,15 @@ a {
   margin-block: 8px;
 }
 
+.flag-container {
+  height: 160px;
+  overflow: hidden;
+}
+
 .country-card img {
+  object-fit: cover;
   width: 100%;
+  height: 100%;
 }
 
 .search-filter-container {
@@ -227,8 +274,36 @@ a {
   }
 }
 
-.country-shimmer {
-  background-color: #ccc;
-  height: 350px;
+main .shimmer-card {
+  --shimmer-color: #c7c7c7;
+}
+
+main.dark .shimmer-card {
+  --shimmer-color: #445869;
+}
+
+.shimmer-card {
+  background-color: var(--elements-color);
+  height: 338px;
+}
+
+.shimmer-card .flag-container {
+  background-color: var(--shimmer-color);
+}
+
+.shimmer-card .card-title {
+  background-color: var(--shimmer-color);
+  border-radius: 4px;
+  height: 32px;
+}
+
+.shimmer-card p {
+  background-color: var(--shimmer-color);
+  border-radius: 4px;
+  height: 22px;
+}
+
+.shimmer-card p:last-child {
+  width: 60%;
 }
 /*# sourceMappingURL=index.c41b5a0e.css.map */

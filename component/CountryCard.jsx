@@ -4,7 +4,9 @@ import { Link} from 'react-router-dom'
 export default function CountryCard({flag,population,region,capital,name,data}){
   return (
     <Link className="country-card" to={`/${name}`} state={data}>
+      <div className='flag-container'>
       <img src={flag} alt={name + ' Flag'}/>
+      </div>
       <div className="card-text">
         <h3 className="card-title">{name}</h3>
         <p>

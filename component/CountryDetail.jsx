@@ -1,31 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 
 import './CountryDetail.css'
-import { Link, useLocation, useOutletContext, useParams } from 'react-router-dom'
-import { ThemeContext } from './ThemeContext'
+import { Link, useLocation,  useParams } from 'react-router-dom'
+import CountryDetailShimmer from './CountryDetailShimmer.jsx'
+import { useTheme } from '../hooks/useTheme'
 
 export default function CountryDetail() {
   const params =useParams()
   const {state}=useLocation()
   const [countryData, setCountryData] = useState(null)
   const [found,setFound]=useState(false)
-  const [isDark]=useContext(ThemeContext)
+  const [isDark]=useTheme();
   function stateData(data){
     setCountryData({
-      name: data.name.common,
-      nativeName: Object.values(data.name.nativeName)[0].common,
+      name: data.name.common || data.name,
+      nativeName: Object.values(data.name.nativeName || {})[0]?.common,
       population: data.population,
       region: data.region,
       subregion: data.subregion,
       capital: data.capital,
       flag: data.flags.svg,
       tld: data.tld,
-      languages: Object.values(data.languages).join(', '),
-      currencies: Object.values(data.currencies)
+      languages: Object.values(data.languages || {}).join(', '),
+      currencies: Object.values(data.currencies || {})
         .map((currency) => currency.name)
         .join(', '),
-        borders:[]
-      
+      borders: [],
     })
 
     if(!data.borders) {
@@ -64,15 +64,18 @@ export default function CountryDetail() {
   if(found){
     return <h1>Data not found</h1>
   }
-  return countryData === null ? (
-    'loading...'
-  ) : (
+ 
+  return(
     <main className={`${isDark?'dark':''}`}>
       <div className="country-details-container">
         <span className="back-button" onClick={()=>history.back()}>
           <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
         </span>
-        <div className="country-details">
+        {
+        countryData === null ? (
+          <CountryDetailShimmer />
+        )
+        :(<div className="country-details">
           <img src={countryData.flag} alt={`${countryData.name} flag`} />
           <div className="details-text-container">
             <h1>{countryData.name}</h1>
@@ -96,7 +99,7 @@ export default function CountryDetail() {
                 <span className="sub-region"></span>
               </p>
               <p>
-                <b>Capital: {countryData.capital.join(', ')}</b>
+                <b>Capital: {countryData.capital?.join(', ')}</b>
                 <span className="capital"></span>
               </p>
               <p>
@@ -121,6 +124,7 @@ export default function CountryDetail() {
          }
           </div>
         </div>
+        )}
       </div>
     </main>
   )

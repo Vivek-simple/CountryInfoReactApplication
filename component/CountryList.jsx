@@ -37,7 +37,7 @@ export default function CountryList({query}) {
     {
     CountryData.length==0 ?<CountryShimmer/> :<div className="countries-container">
         {
-            CountryData.filter((country)=>country.name.common.toLowerCase().includes(query)).map((country)=>{
+            CountryData.filter((country)=>country.name.common.toLowerCase().includes(query) || country.region.toLowerCase().includes(query)).map((country)=>{
                 return <CountryCard
                 key={country.name.common}
                 flag={country.flags.svg}
